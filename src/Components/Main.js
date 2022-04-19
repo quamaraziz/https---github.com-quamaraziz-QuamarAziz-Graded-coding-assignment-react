@@ -2,10 +2,20 @@ import { getDefaultNormalizer } from "@testing-library/react";
 import react,{useState} from "react";
 import { useEffect } from "react/cjs/react.development";
 import Card from "./Card";
+
 let API_key="&api_key=db95773a7fb212ba790d71f6adac0e7e";
 let base_url="https://api.themoviedb.org/3";
 let url=base_url+"/discover/movie?sort_by=popularity.desc"+API_key;
-let arr=["Popular","Theatre","Kids","Drama","Comedie"];
+let arr=["Comming Soon","In Theatres","Top Rated Indian","Top Rated","Favourites"];
+
+let currentDate = new Date();
+let yr = currentDate.getFullYear();
+let m = currentDate.getMonth();
+let d = currentDate.getDate();
+console.log(d);currentDate.setUTCFullYear(yr, m, d)
+const ymd = currentDate.toISOString().split('T')[0].split('-')
+const result = `${ymd[0]}-${ymd[1]}-${ymd[2]}`;
+
 const Main=()=>{
     const [movieData,setData]=useState([]);
     const [url_set,setUrl]=useState(url);
@@ -17,25 +27,25 @@ const Main=()=>{
     },[url_set])
 
     const getData=(movieType)=>{
-        if(movieType=="Popular")
+        if(movieType=="Comming Soon")
         {
-            url=base_url+"/discover/movie?sort_by=popularity.desc"+API_key;
+            url=base_url+"/discover/movie?primary_release_date.gte=2022-04-20"+API_key;
         }
-        if(movieType=="Theatre")
+        if(movieType=="In Theatres")
         {
-            url=base_url+"/discover/movie?primary_release_date.gte=2014-09-15&primary_release_date.lte=2014-10-22"+API_key;
+            url=base_url+"/discover/movie?primary_release_date.gte=2022-04-01&primary_release_date.lte="+result+API_key;
         }
-        if(movieType=="Kids")
+        if(movieType=="Top Rated Indian")
         {
-            url=base_url+"/discover/movie?certification_country=US&certification.lte=G&sort_by=popularity.desc"+API_key;
+            url=base_url+"/discover/movie?with_original_language=hi&primary_release_year=2014&sort_by=vote_average.desc&vote_count.gte=7.5"+API_key;
         }
-        if(movieType=="Drama")
+        if(movieType=="Top Rated")
         {
-            url=base_url+"/discover/movie?with_genres=18&primary_release_year=2014"+API_key;
+            url=base_url+"/discover/movie?with_primary_release_year=2015&sort_by=vote_average.desc&vote_count.gte=8"+API_key;
         }
-        if(movieType=="Comedie")
+        if(movieType=="Favourites")
         {
-            url=base_url+"/discover/movie?with_genres=35&with_cast=23659&sort_by=revenue.desc"+API_key;
+            url=base_url+"/discover/movie?with_original_language=hi&popularity=sort_by.desc"+API_key;
         }
         setUrl(url);
 
@@ -50,38 +60,48 @@ const Main=()=>{
     }
     return(
         <>
-            <div className="header">
-                <nav>
-                    <ul>
-                        {
-                            arr.map((value,pos)=>{
-                                return(
-                                    <li><a href="#" key={pos} name={value} onClick={(e)=>{getData(e.target.name)}}>{value}</a></li>
-                                )
-                            })
-                        }
-                       
-                    </ul>
-                </nav>
-                <form>
-                    <div className="search-btn">
-                        <input type="text" placeholder="Enter Movie Name" 
-                        className="inputText" onChange={(e)=>{setSearch(e.target.value)}} 
-                        value={search} onKeyPress={searchMovie}>
-                        </input>
-                        <button><i className="fas fa-search"></i></button>
+            <div class="backdrop">
+                <div class="Container">
+                    <div class="Header">
+                        <div class="appName">
+                            <img class="appImage" src="/movie-header-icon.jpg"/>
+                            ShowBizz
+                        </div>
+                    
+                        <div class="searchBox">
+                            <img class="searchIcon" src="/searching.png"/>
+                            <input class="searchInput" type="text" 
+                                placeholder='Search Movies' 
+                                onChange={(e)=>{setSearch(e.target.value)}} 
+                                value={search} onKeyPress={searchMovie}>
+                            </input>
+                        </div>
                     </div>
-                </form>
+                        <nav>
+                            <ul>
+                                {
+                                    arr.map((value,pos)=>{
+                                        return(
+                                            <li><a href="#" key={pos} name={value} onClick={(e)=>{getData(e.target.name)}}>{value}</a></li>
+                                        )
+                                    })
+                                }
+                                
+                            </ul>
+                        </nav>
+                </div>
+        
+                <div className="movie-container" >
+                    {
+                        (movieData.length==0)?<p className="notfound">Not Found</p>: movieData.map((res,pos)=>{
+                            return(
+                                <Card info={res} key={pos}/>
+                            )
+                        })
+                    }
+                </div>
             </div>
-            <div className="container">
-                {
-                    (movieData.length==0)?<p className="notfound">Not Found</p>: movieData.map((res,pos)=>{
-                        return(
-                            <Card info={res} key={pos}/>
-                        )
-                    })
-                }
-            </div>
+            
         </>
     )
 }

@@ -5,20 +5,18 @@
     font-family: 'Poppins', sans-serif;
 }
 :root{
-    --primary-color:#bf6f13;
-    --secondary-color:#e88e27;
+    --primary-color:#cdcec3;
+    --secondary-color: #2683a5;
+    background-image: linear-gradient(to right, #00d2ff , #3a7bd5);
 }
 body{
     background-color: var(--primary-color);
 }
-.header{
-    background-color: var(--secondary-color);
-    height: 100px;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-bottom: 30px;
+
+nav{
+    background-color: #2683a5;
+    padding: 10px;
+    background-image: linear-gradient(to right, #00d2ff , #3a7bd5);
 }
 nav ul{
     display: flex;
@@ -30,7 +28,7 @@ nav ul li{
 nav ul li a{
     text-decoration: none;
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.0rem;
     font-weight: bold;
     padding: 0.2rem 0.6rem;
     position: relative;
@@ -48,6 +46,9 @@ nav ul li a::before{
 }
 nav ul li a:hover:before{
     width:100%;
+    border-radius: 6px;
+    background-color: #97ddf9;
+    
 }
 nav ul li a:focus{
     background-color: var(--primary-color);
@@ -82,8 +83,9 @@ nav ul li a:focus::before{
     font-size: 1rem;
     outline: none;
     border: 1px solid var(--primary-color);
+    background-image: linear-gradient(to right, #00d2ff , #3a7bd5);
 }
-.container{
+.movie-container{
     margin: auto;
     width: 80%;
     display: flex;
@@ -99,7 +101,13 @@ nav ul li a:focus::before{
     box-sizing: border-box;
     overflow: hidden;
     position: relative;
+    cursor: pointer;
+    background-image: linear-gradient(to right, #00d2ff , #3a7bd5);
 }
+.movie:hover{
+    box-shadow: 0 10px 15px rgba(0,0,0,1);
+} 
+
 .movie .poster{
     width: 100%;
     height: 250px;
@@ -121,6 +129,7 @@ nav ul li a:focus::before{
     width: 160px;
     font-size: 15px;
     text-align: center;
+    color: rgba(0, 0, 0, 0.5);
 }
 .movie-details .overview{
     position: absolute;
@@ -135,12 +144,14 @@ nav ul li a:focus::before{
     transition: all 0.4s ease-in-out;
     overflow-y: auto;
     transform: translateY(101%);
+    background-image: linear-gradient(to right, #00d2ff , #3a7bd5);
 }
 .movie-details:hover .overview{
     transform: translateY(0%);
+    background-image: linear-gradient(to right, #00d2ff , #3a7bd5);
 }
 .rating{
-    background-color: var(--primary-color);
+    background-color: goldenrod;
     width: 35px;
     height: 35px;
     border-radius: 50%;
@@ -158,6 +169,7 @@ nav ul li a:focus::before{
     .header{
         background-color: var(--secondary-color);
         height: 180px;
+        background-image: linear-gradient(to right, #00d2ff , #3a7bd5);
     }
     nav ul{
         display: flex;
@@ -174,4 +186,94 @@ nav ul li a:focus::before{
 .notfound{
     font-size: 40px;
     font-weight: bold;
+}
+
+.favourite {
+    color: white;
+    background-color: #00d2ff ;
+    border-style: none;
+    margin-left: 5px;
+}
+
+.favourite:hover {
+    border-style: groove;
+}
+
+.favourite:focus {
+    color: red;
+}
+
+.headerIcon{
+    width: 54px;
+  height: 54px;
+  margin: 15px;
+}
+
+.Container {
+  display: flex;
+  flex-direction: column;
+}
+
+.Header {
+  display: flex;
+  flex-direction: row;
+  background-color: #2683a5;
+  color: white;
+  padding: 10px;
+  font-size: 25px;
+  font-weight: bold;
+  box-shadow: 0 3px 6px 0 #555;
+  justify-content: space-between;
+  align-items: center;
+  background-image: linear-gradient(to right, #00d2ff , #3a7bd5);
+}
+
+.appName{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.appImage{
+  width: 48px;
+  height: 48px;
+  margin: 15px;
+}
+
+.searchBox {
+    display: felx;
+    flex-direction: row;
+    padding: 10px 10px;
+    background-color: white;
+    border-radius: 6px;
+    margin: 20px 20px;
+    width: 20%;
+    background-color: white;
+    align-items: center;  
+}
+
+.searchIcon {
+  width: 15px;
+  height: 15px;
+}
+
+.searchInput {
+  border: none;
+  color: black;
+  font-size: 15px;
+  font-weight: bold;
+  outline: none;
+  margin-left: 15px;
+}
+
+.buttons {
+  background-color: #106A8D;
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  margin-right: 0;
+}
+
+.backdrop {
+    background-image: linear-gradient(rgba(2, 2, 2, 0.1), rgba(255, 255, 255, 0.758)), url("../../public/backdrop.jpg");
 }

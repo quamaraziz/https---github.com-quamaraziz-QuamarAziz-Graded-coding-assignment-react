@@ -6,9 +6,14 @@ const Card=(movie)=>{
     return(
         <>
             <div className="movie">
-                <img src={img_path+movie.info.poster_path} className="poster"></img>
+                <a href={`https://www.themoviedb.org/movie/${movie.info.id}`} alt="link-to-site">
+                    <img src={img_path+movie.info.poster_path} className="poster"></img>
+                </a>                
+                <button class="favourite" type="button">&#x2764;</button>
+                {/* <button type="button" onClick={()=> toggleFavAction(movie)}>Fav</button> */}
                 <div className="movie-details">
                     <div className="box">
+                        
                         <h4 className="title">{movie.info.title}</h4>
                         <p className="rating">{movie.info.vote_average}</p>
                     </div>
