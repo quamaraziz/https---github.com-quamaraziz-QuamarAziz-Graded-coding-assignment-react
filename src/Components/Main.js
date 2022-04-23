@@ -61,15 +61,15 @@ const Main=()=>{
     return(
         <>
             <div class="backdrop">
-                <div class="Container">
+                <div class="Container">      
                     <div class="Header">
                         <div class="appName">
-                            <img class="appImage" src="/movie-header-icon.jpg"/>
+                            <img class="appImage" src={require("../images/movie-header-icon.png")}/>
                             ShowBizz
                         </div>
                     
                         <div class="searchBox">
-                            <img class="searchIcon" src="/searching.png"/>
+                            <img class="searchIcon" src={require("../images/searching.png")}/>
                             <input class="searchInput" type="text" 
                                 placeholder='Search Movies' 
                                 onChange={(e)=>{setSearch(e.target.value)}} 
